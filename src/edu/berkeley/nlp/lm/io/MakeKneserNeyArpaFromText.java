@@ -54,7 +54,11 @@ public class MakeKneserNeyArpaFromText
 		wordIndexer.setStartSymbol(ArpaLmReader.START_SYMBOL);
 		wordIndexer.setEndSymbol(ArpaLmReader.END_SYMBOL);
 		wordIndexer.setUnkSymbol(ArpaLmReader.UNK_SYMBOL);
-		LmReaders.createKneserNeyLmFromTextFiles(inputFiles, wordIndexer, lmOrder, new File(outputFile), new ConfigOptions());
+		File outFile = new File(outputFile);
+		if(!outFile.getParentFile().exists()){
+			outFile.getParentFile().mkdirs();
+		}
+		LmReaders.createKneserNeyLmFromTextFiles(inputFiles, wordIndexer, lmOrder, outFile, new ConfigOptions());
 		Logger.endTrack();
 	}
 
